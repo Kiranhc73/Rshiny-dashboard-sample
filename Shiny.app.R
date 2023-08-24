@@ -7,7 +7,8 @@ ui <- dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem("Sales Analysis", tabName = "Sales", icon = icon("dashboard")),
-      menuItem("Profit Analysis", tabName = "Profit", icon = icon("dashboard"))
+      menuItem("Profit Analysis", tabName = "Profit", icon = icon("dashboard")),
+      menuItem("Profit vs sales", tabName = "scatter", icon = icon("dashboard"))
     )
   ),
   dashboardBody(
@@ -17,14 +18,14 @@ ui <- dashboardPage(
         wellPanel( fluidRow(
           box(width=6,height = "100%",
             
-                 plotOutput("sales"),
+                 plotOutput("sales",height = "500px"),
                  title="sales_vs_sub-category"
                  
           
       
           ), box(width=6,height = "100%",
                 
-                   plotOutput("sales2"),
+                   plotOutput("sales2",height = "500px"),
                    title="sales_vs_region"
                  
                  
@@ -37,13 +38,13 @@ ui <- dashboardPage(
         wellPanel( fluidRow(
           box(width=6,height = "100%",
               
-                plotOutput("profit"),
+                plotOutput("profit",height = "500px"),
                 title="profit_vs_sub-category"
               
               
           ), box(width=6,height = "100%",
                  
-                   plotOutput("profit2"),
+                   plotOutput("profit2",height = "500px"),
                    title ="profit_vs_region"
                  
                  
@@ -52,6 +53,17 @@ ui <- dashboardPage(
         
         )
         
+      ),
+      tabItem(
+        tabName = "scatter",
+        wellPanel(
+          fluidRow(
+            box(width = 12,
+              plotOutput("scatter",height = "600px"),
+              title = "Profit vs Sales"
+            )
+          )
+        )
       )
     )
   )
@@ -71,6 +83,10 @@ server <- function(input, output) {
   
   output$profit2 <- renderPlot({
     col_region_profit()
+  })
+  
+  output$scatter <- renderPlot({
+    Scatter_plot
   })
 }
 

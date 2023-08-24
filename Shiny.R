@@ -76,6 +76,19 @@ col_region_profit<- function(){
 
 }
 
+store_data %>% 
+  ggplot(aes(x = Sales, y = Profit, color = Discount, size = Profit_ratio)) +
+  geom_point(alpha = 0.7) +  # Adding transparency for better visibility of overlapping points
+  scale_color_gradient(low = "blue", high = "red") +  # Custom color scale
+  scale_size_continuous(range = c(1, 4)) +  # Custom size range for points
+  theme_minimal() +  # Aesthetically pleasing minimal theme
+  theme(
+    legend.position = "bottom",  # Move legend to the bottom
+    plot.title = element_text(hjust = 0.5),  # Center the plot title
+    axis.title = element_text(size = 12),  # Increase axis title font size
+    legend.title = element_text(size = 10),  # Increase legend title font size
+    legend.text = element_text(size = 9)  # Increase legend text font size
+  )->Scatter_plot
 
 
 

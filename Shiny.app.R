@@ -17,21 +17,17 @@ ui <- dashboardPage(
         tabName = "Sales",
         wellPanel( fluidRow(
           box(width=6,height = "100%",
-            
                  plotOutput("sales",height = "500px"),
                  title="sales_vs_sub-category"
-                 
-          
-      
           ), box(width=6,height = "100%",
-                
                    plotOutput("sales2",height = "500px"),
                    title="sales_vs_region"
-                 
-                 
+                  ),
+          box(width=12,height = "100%",
+              plotOutput("sales3",height = "500px"),
+              title="Monthly trend of Sales"
           )
-        )
-       
+             )
       )),
       tabItem(
         tabName = "Profit",
@@ -48,6 +44,13 @@ ui <- dashboardPage(
                    title ="profit_vs_region"
                  
                  
+          ),
+          box(width=12,height = "100%",
+              
+              plotOutput("profit3",height = "500px"),
+              title ="Monthly trend of Profit"
+              
+              
           )
         )
         
@@ -88,6 +91,15 @@ server <- function(input, output) {
   output$scatter <- renderPlot({
     Scatter_plot
   })
+  
+  output$sales3 <- renderPlot({
+    time_series_sales
+  })
+  
+  output$profit3 <- renderPlot({
+    time_series_profit
+  })
+  
 }
 
 shinyApp(ui, server)
